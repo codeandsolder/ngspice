@@ -1,0 +1,8 @@
+* All three XSPICE logic states; UNKNOWN must use finite midpoint.
+0n 0s
+1n Us
+2n 1s
+3n Us
+4n 0s
+5n 1s
+6n Us

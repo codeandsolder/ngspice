@@ -1,0 +1,27 @@
+Code Model Test: d_to_real finite UNKNOWN midpoint and disabled gating
+
+* The UNKNOWN midpoint must never overflow when both endpoints are finite.
+* The enable must suppress NaN/Inf even during UNKNOWN input states.
+Asource [data] D_SOURCE
+Aenable [en] E_SOURCE
+Aequal data NULL equal EQUAL
+Agated data en gated EQUAL
+Anegative data NULL negative NEGATIVE
+Aopposite data NULL opposite OPPOSITE
+Asubnormal data NULL tiny SUBNORMAL
+
+.model D_SOURCE d_source(input_file="d_to_real_midpoint-input.txt" input_load=0)
+.model E_SOURCE d_source(input_file="d_to_real_midpoint-enable.txt" input_load=0)
+.model EQUAL d_to_real(zero=1e308 one=1e308 delay=180p)
+.model NEGATIVE d_to_real(zero=-1e308 one=-1e308 delay=180p)
+.model OPPOSITE d_to_real(zero=-1e308 one=1e308 delay=180p)
+.model SUBNORMAL d_to_real(zero=1e-320 one=1e-320 delay=180p)
+
+.control
+set noaskquit
+set noacct
+tran 25p 6.4n
+eprint data en equal gated negative opposite tiny
+.endc
+
+.end

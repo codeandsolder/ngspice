@@ -1,3 +1,4 @@
 codemodel @top_builddir@/src/xspice/icm/digital/digital.cm
+codemodel @top_builddir@/src/xspice/icm/xtraevt/xtraevt.cm
 set sourcepath = ( $ngspice_vpath . )
 set filetype=binary
