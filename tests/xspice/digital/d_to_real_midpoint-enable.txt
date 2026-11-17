@@ -1,0 +1,7 @@
+* Asynchronously toggle enable while the digital input is UNKNOWN.
+0n 1s
+1.5n 0s
+2.5n 1s
+3.5n 0s
+4.5n 1s
+5.5n 0s
