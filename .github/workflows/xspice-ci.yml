@@ -16,17 +16,24 @@ concurrency:
 jobs:
   xspice:
     name: Build original XSPICE and run native tests
-    runs-on: [self-hosted, Linux, X64, local-ci, asus]
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install ngspice Autotools and XSPICE build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf automake libtool libtool-bin bison flex texinfo \
+            pkg-config make gcc libreadline-dev libncurses-dev \
+            libx11-dev libxext-dev libxmu-dev libxaw7-dev
 
       - name: Autotools build and original XSPICE regression
         shell: bash
         run: |
           set -euo pipefail
           command -v gcc
-          test -x /usr/local/bin/sccache
 
           source_root="$PWD"
           build_root="$(mktemp -d "$RUNNER_TEMP/ngspice-xspice-XXXXXXXX")"
@@ -38,7 +45,7 @@ jobs:
           fi
           cd "$build_root"
 
-          if ! CC="/usr/local/bin/sccache gcc" CFLAGS="-O2 -g" \
+          if ! CC=gcc CFLAGS="-O2 -g" \
             "$source_root/configure" --prefix="$build_root/install" \
             --enable-xspice --enable-cider --with-readline=yes \
             --disable-debug >configure.log 2>&1; then
