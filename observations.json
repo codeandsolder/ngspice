@@ -1,5 +1,10 @@
 {
   "source": "imr/ngspice:master",
-  "lastAttempt": 1795362720451,
-  "observations": []
+  "lastAttempt": 1795362722329,
+  "observations": [
+    {
+      "sha": "a80f6e3e95d51534905b1f23410a951802666656",
+      "firstObserved": 1795362722329
+    }
+  ]
 }
