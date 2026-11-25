@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   sync:
-    uses: codeandsolder/ci-workflows/.github/workflows/upstream-tracking.yml@f1499fe94abf45faacae7992670e5163109225f0 # main
+    uses: codeandsolder/ci-workflows/.github/workflows/upstream-tracking.yml@7df510a2053e220c010c331b5daef81a593a19bb # main
     with:
       upstream-repository: imr/ngspice
       upstream-branch: master
